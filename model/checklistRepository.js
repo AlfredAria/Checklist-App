@@ -48,10 +48,10 @@ ChecklistRepository.prototype.add = function (checklistItem, callback) {
 
 ChecklistRepository.prototype.updateAtIndex = function (checklistItem, callback) {
 	db.run("update CheckList set itemName=?, date=?, itemDone=? where itemIndex=?",
-		checklistItem.getIndex(),
 		checklistItem.getItemName(), 
 		checklistItem.getDate(), 
 		checklistItem.getDone(),
+		checklistItem.getIndex(),
 		callback);
 }
 

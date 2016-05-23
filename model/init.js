@@ -11,7 +11,7 @@ module.exports = function () {
 			console.log("Drop table");
 			db.run("drop table if exists CheckList");
 			console.log("Create table");
-			db.run("create table CheckList (itemIndex integer primary key autoincrement, itemName text, date timestamp, itemDone int)");
+			db.run("create table CheckList (itemIndex integer primary key autoincrement, itemName text, date text, itemDone int)");
 		} catch (e) {
 			console.log(e);
 		}

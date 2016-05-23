@@ -1,4 +1,4 @@
-// index: number, itemName: string, date: Date, done: boolean
+// index: number, itemName: string, date: string, done: integer (0/1)
 ChecklistItem = function (index, itemName, date, done) {
 	this.index = index;
 	this.itemName = itemName;

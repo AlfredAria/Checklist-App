@@ -6,8 +6,8 @@ var Repo = require('../model/checklistRepository.js');
 var repo = new Repo();
 var ChecklistItem = require('../model/checklist.js');
 
-router.get('/all', function(req, res) {
-	console.log("checklistRouter.all");
+router.get('/', function(req, res) {
+	console.log("checklistRouter.query");
 	repo.listAll(function(err, rows) {
 		if (err) {
 			res.status(500).json({message: err});
@@ -17,9 +17,9 @@ router.get('/all', function(req, res) {
 	});
 });
 
-router.get('/at/:index', function(req, res) {
+router.get('/:index', function(req, res) {
 	var index = req.params.index;
-	console.log("checklistRouter.at." + index);
+	console.log("checklistRouter.get." + index);
 	repo.findAtIndex(index, function(err, row) {
 		if (err) {
 			res.status(500).json({message: err});
@@ -33,9 +33,9 @@ router.get('/at/:index', function(req, res) {
 	});
 });
 
-router.post('/remove/:index', function(req, res) {
+router.delete('/:index', function(req, res) {
 	var index = req.params.index;
-	console.log("checklistRouter.remove.at." + index);
+	console.log("checklistRouter.delete." + index);
 	repo.removeAtIndex(index, function(err, row) {
 		if (err) {
 			res.status(500).json({message: err});
@@ -56,7 +56,7 @@ router.post('/remove/all', function(req, res) {
 	});
 });
 
-router.post('/update/:index', function(req, res) {
+router.put('/:index', function(req, res) {
 	var index = req.params.index;
 	console.log("checklistRouter.update.index." + index);
 	var updatedItem = new ChecklistItem (index, 
@@ -72,8 +72,8 @@ router.post('/update/:index', function(req, res) {
 	});
 });
 
-router.post('/add', function(req, res) {
-	console.log("checklistRouter.add." + 
+router.post('/', function(req, res) {
+	console.log("checklistRouter.put." + 
 		req.body.itemName);
 	var newItem = new ChecklistItem (0,
 		req.body.itemName,

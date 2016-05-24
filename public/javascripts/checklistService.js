@@ -2,14 +2,14 @@
 
 var checklistServices = angular.module ('checklistServices', ['ngResource']);
 
-checklistServices.factory('ChecklistItem', ['$resource',
+checklistServices.factory('ChecklistItems', ['$resource',
 	
 	function($resource) {
 		return $resource(
 			'/checklist/:id', 
 			{id: '@_id'},
-			{
-				method: 'PUT'
+			{update: 
+				{method: 'PUT'}
 			});
 	}]
 

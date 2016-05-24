@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
 		if (err) {
 			res.status(500).json({message: err});
 		} else {
+			console.log(rows);
 			res.status(200).json(rows);
 		}
 	});
@@ -56,8 +57,8 @@ router.post('/remove/all', function(req, res) {
 	});
 });
 
-router.put('/:index', function(req, res) {
-	var index = req.params.index;
+router.put('/', function(req, res) {
+	var index = req.body.itemIndex;
 	console.log("checklistRouter.update.index." + index);
 	var updatedItem = new ChecklistItem (index, 
 		req.body.itemName,
@@ -73,7 +74,7 @@ router.put('/:index', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-	console.log("checklistRouter.put." + 
+	console.log("checklistRouter.add." + 
 		req.body.itemName);
 	var newItem = new ChecklistItem (0,
 		req.body.itemName,

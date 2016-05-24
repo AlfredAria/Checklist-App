@@ -1,0 +1,45 @@
+<!-- index.html -->
+<!doctype html>
+<html ng-app="checklistApp">
+<head>
+	<meta char-set="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/"/>
+    <title>My Checklist Application</title>
+
+    <script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
+
+    <script type="text/javascript" src="/javascripts/checklistService.js"></script>
+    <script type="text/javascript" src="/javascripts/checklistController.js"></script>
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div ng-controller="checklistController">
+		<ul> 
+			<li ng-repeat="checklistItem in checklistItems | filter:{itemDone:0}" ng-click="checkItem(checklistItem)">
+				<span>{{checklistItem.itemIndex}}</span>
+				<span>{{checklistItem.itemName}}</span>
+				<span>{{checklistItem.date}}</span>
+				<span>{{checklistItem.itemDone == 0 ? '(TODO)' : '(DONE)'}}</span>
+			</li>
+		</ul>
+
+		<form class="form">
+		  <fieldset class="form-group">
+		    <label for="itemName">Item Name</label>
+		    <input type="text" class="form-control" id="itemName" placeholder="Enter Item Name" ng-model="newItemName">
+		  </fieldset>
+		  <button class="btn btn-primary" ng-click="add()">Add</button>
+		</form>
+
+	</div>
+
+
+</body>
+</html>

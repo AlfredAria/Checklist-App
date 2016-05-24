@@ -3,42 +3,65 @@
 <html ng-app="checklistApp">
 <head>
 	<meta char-set="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="/"/>
-    <title>My Checklist Application</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="/"/>
+	<title>My Checklist Application</title>
 
-    <script type="text/javascript" src="/bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
+	<script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-resource/angular-resource.js"></script>
+	<script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
 
-    <script type="text/javascript" src="/javascripts/checklistService.js"></script>
-    <script type="text/javascript" src="/javascripts/checklistController.js"></script>
+	<script type="text/javascript" src="/javascripts/checklistService.js"></script>
+	<script type="text/javascript" src="/javascripts/checklistController.js"></script>
 
-    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<style type="text/css">
+		.checklistTable th {width:25%}
+		.checklistTable td {width:25%}
+	</style>
 </head>
 <body>
-	<div ng-controller="checklistController">
-		<ul> 
-			<li ng-repeat="checklistItem in checklistItems | filter:{itemDone:0}" ng-click="checkItem(checklistItem)">
-				<span>{{checklistItem.itemIndex}}</span>
-				<span>{{checklistItem.itemName}}</span>
-				<span>{{checklistItem.date}}</span>
-				<span>{{checklistItem.itemDone == 0 ? '(TODO)' : '(DONE)'}}</span>
-			</li>
-		</ul>
+
+
+	<div ng-controller="checklistController" class="container">
+
+		<h2> Checklist App </h2>
+		<h6> Alfred Huang, May 23, 2016 </h6>
 
 		<form class="form">
-		  <fieldset class="form-group">
-		    <label for="itemName">Item Name</label>
-		    <input type="text" class="form-control" id="itemName" placeholder="Enter Item Name" ng-model="newItemName">
-		  </fieldset>
-		  <button class="btn btn-primary" ng-click="add()">Add</button>
+			<fieldset class="form-group">
+				<label for="itemName">Item Name</label>
+				<input type="text" class="form-control" id="itemName" placeholder="Enter Item Name" ng-model="newItemName">
+			</fieldset>
+			<button class="btn btn-primary" ng-click="add()">Add</button>
 		</form>
 
-	</div>
+		<table class="checklistTable table table-hover">
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>Item Name</th>
+					<th>Date Last Updated</th>
+					<th>Done</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr href="#"
+				ng-repeat="checklistItem in checklistItems | filter:{itemDone:0}" ng-click="checkItem(checklistItem)"
+				data-toggle="tooltip" data-placement="right" title="Click To Check">
+				<td>{{checklistItem.itemIndex}}</td>
+				<td>{{checklistItem.itemName}}</td>
+				<td>{{checklistItem.date}}</td>
+				<td>{{checklistItem.itemDone == 0 ? '(TODO)' : '(DONE)'}}</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+</div>
 
 
 </body>
